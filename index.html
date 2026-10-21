@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071433">
+<title>Halloween Party – Paterstraat 77</title>
+<meta property="og:title" content="Halloween Party – Paterstraat 77">
+<meta property="og:description" content="Saturday Oct 31, 20:00. Costumes mandatory, bring drinks.">
+<meta property="og:image" content="invite.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800&family=Bricolage+Grotesque:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+/* ===== EDIT THESE ===== */
+const CONFIG = {
+  formspreeId: "xaeqrlpr",          // free form ID from formspree.io (the part after /f/)
+  email: "adrianbrauksiepe@gmail.com"  // fallback if formspreeId is empty
+};
+/* ====================== */
+</script>
+<style>
+  :root { color-scheme: dark; --glow:#4fd6e8; --paper:#f4ecdf; --muted:#a9bde3; --pumpkin:#e8651a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100dvh; color: var(--paper);
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    background:
+      radial-gradient(60% 40% at 15% 85%, rgba(79,214,232,.28), transparent 70%),
+      radial-gradient(50% 45% at 90% 25%, rgba(46,100,200,.55), transparent 70%),
+      linear-gradient(180deg, #071433 0%, #0d2557 60%, #11397a 100%);
+    background-attachment: fixed;
+    padding: env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
+  }
+  main {
+    max-width: 1000px; margin: 0 auto; padding: clamp(24px,6vw,80px) 20px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px 56px; align-items: start;
+  }
+  h1 { font-family: "Fraunces", serif; font-weight: 800; font-size: clamp(2.5rem,9vw,4.2rem);
+       line-height: 1; letter-spacing: -.02em; margin: 0 0 22px; color: #fff; }
+  .when { font-size: clamp(1.35rem,5vw,1.7rem); margin: 0; }
+  .time { font-size: 1.1rem; color: var(--muted); margin: 4px 0 20px; }
+  .meta { margin: 0 0 6px; }
+  .sub { color: var(--muted); }
+  .actions { display: flex; gap: 12px; margin-top: 26px; }
+  .btn {
+    flex: 1; min-height: 52px; font: inherit; font-weight: 700; font-size: 1.02rem;
+    border-radius: 8px; cursor: pointer; padding: 12px 14px; touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .yes { background: #fff; color: #0a0a0a; border: 0; }
+  .yes:hover { background: var(--paper); }
+  .no { background: rgba(255,255,255,.08); color: var(--paper); border: 1px solid rgba(255,255,255,.4); }
+  .no:hover { background: rgba(255,255,255,.16); }
+  .invite { width: 100%; max-width: 440px; justify-self: center; }
+  .invite img { width: 100%; height: auto; display: block; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .done { margin: 22px 0 0; font-size: 1.1rem; }
+  .hidden { display: none !important; }
+  :focus-visible { outline: 3px solid var(--glow); outline-offset: 3px; }
+
+  /* animated Halloween sky */
+  main { position: relative; z-index: 1; }
+  .sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .star {
+    position: absolute; background: #cffaff;
+    clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+    filter: drop-shadow(0 0 4px rgba(79,214,232,.9));
+  }
+  .star.warm { background: #ffd08a; filter: drop-shadow(0 0 4px rgba(255,150,40,.9)); }
+  .float { position: absolute; bottom: -90px; will-change: transform; opacity: .92; }
+  .shoot {
+    position: absolute; height: 2px; width: 120px; border-radius: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0), #fff);
+    transform: rotate(25deg); opacity: 0;
+  }
+  .moon {
+    position: absolute; top: 6vh; right: 7vw; width: 90px; height: 90px; border-radius: 50%;
+    box-shadow: inset 18px -6px 0 0 #ffe9b0, 0 0 50px rgba(255,200,100,.35);
+    transform: rotate(-20deg); opacity: .9;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .star { animation: twinkle var(--d,3s) ease-in-out var(--delay,0s) infinite; }
+    @keyframes twinkle { 0%,100% { opacity: .15; transform: scale(.6) rotate(0); } 50% { opacity: 1; transform: scale(1) rotate(25deg); } }
+    .float { animation: drift var(--dur,22s) linear var(--delay,0s) infinite; }
+    @keyframes drift {
+      0%   { transform: translate(0, 0) rotate(-8deg); }
+      25%  { transform: translate(var(--sway,30px), -28vh) rotate(8deg); }
+      50%  { transform: translate(calc(var(--sway,30px) * -1), -58vh) rotate(-8deg); }
+      75%  { transform: translate(var(--sway,30px), -88vh) rotate(8deg); }
+      100% { transform: translate(0, -125vh) rotate(-8deg); }
+    }
+    .shoot { animation: shoot 1.2s ease-out forwards; }
+    @keyframes shoot {
+      0% { opacity: 0; transform: translate(0,0) rotate(25deg); }
+      15% { opacity: 1; }
+      100% { opacity: 0; transform: translate(260px,120px) rotate(25deg); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) { .float { display: none; } }
+
+  /* illustrated critters */
+  .float svg, .dangle svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .dangle { position: absolute; top: 0; will-change: transform; opacity: .9; }
+  .ghost svg { filter: drop-shadow(0 0 8px rgba(190,230,255,.7)); }
+  .pumpkin svg { filter: drop-shadow(0 0 8px rgba(255,140,30,.5)); }
+  .wl, .wr { transform-origin: 28px 16px; }
+  .wr { transform-origin: 32px 16px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .wl { animation: flapL .35s ease-in-out infinite alternate; }
+    .wr { animation: flapR .35s ease-in-out infinite alternate; }
+    @keyframes flapL { from { transform: rotate(-24deg); } to { transform: rotate(18deg); } }
+    @keyframes flapR { from { transform: rotate(24deg); } to { transform: rotate(-18deg); } }
+    .ghost svg { animation: bob 3s ease-in-out infinite alternate; }
+    @keyframes bob { from { transform: translateY(-6px) rotate(-4deg); } to { transform: translateY(6px) rotate(4deg); } }
+    .face { animation: flicker 1.6s ease-in-out infinite alternate; }
+    @keyframes flicker { 0% { opacity: .65; } 40% { opacity: 1; } 70% { opacity: .8; } 100% { opacity: 1; } }
+    .dangle { animation: dangle var(--dur,9s) ease-in-out var(--delay,0s) infinite alternate; }
+    @keyframes dangle { from { transform: translateY(-2vh); } to { transform: translateY(var(--drop,22vh)); } }
+    .legs { animation: wiggle .5s ease-in-out infinite alternate; transform-origin: 20px 40px; }
+    @keyframes wiggle { from { transform: scaleX(.92); } to { transform: scaleX(1.06); } }
+  }
+  @media (prefers-reduced-motion: reduce) { .dangle { display: none; } }
+
+  /* popup: bottom sheet on phones, centered card on desktop */
+  dialog {
+    border: 0; padding: 0; color: var(--paper); background: #050c1f;
+    width: min(100%, 420px); border-radius: 18px; margin: auto;
+    box-shadow: 0 20px 80px rgba(0,0,0,.7);
+  }
+  dialog::backdrop { background: rgba(2,6,18,.7); backdrop-filter: blur(3px); }
+  .sheet { padding: 26px 22px calc(22px + env(safe-area-inset-bottom,0)); }
+  .sheet h2 { font-family: "Fraunces", serif; font-size: 1.6rem; margin: 0 0 6px; }
+  .sheet p { margin: 0 0 18px; color: var(--muted); }
+  .sheet input {
+    width: 100%; font: inherit; font-size: 16px; /* 16px stops iOS zooming in */
+    color: var(--paper); padding: 14px 12px; border-radius: 8px;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.3);
+  }
+  .sheet .row { display: flex; gap: 10px; margin-top: 14px; }
+  .err { color: #ff9b8a; margin: 10px 0 0 !important; min-height: 1.2em; }
+
+  @media (max-width: 800px) {
+    main { grid-template-columns: 1fr; }
+    .invite { order: -1; max-width: 360px; }  /* flyer first on phones */
+    dialog { margin: auto 0 0; width: 100%; max-width: none; border-radius: 18px 18px 0 0; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    dialog[open] { animation: up .22s ease-out; }
+    @keyframes up { from { transform: translateY(24px); opacity: 0; } }
+  }
+</style>
+</head>
+<body>
+<div class="sky" id="sky" aria-hidden="true"><div class="moon"></div></div>
+<main>
+  <section>
+    <h1>Halloween Party</h1>
+    <p class="when">Saturday, Oct 31</p>
+    <p class="time">8:00pm</p>
+    <p class="meta"><span class="sub">Hosted by</span> <strong>Paterstraat 77</strong></p>
+    <p class="meta"><strong>Tilburg, North Brabant</strong></p>
+
+    <div class="actions" id="actions">
+      <button class="btn yes" data-answer="going" type="button">I’m going</button>
+      <button class="btn no" data-answer="not going" type="button">I’m not going</button>
+    </div>
+    <p class="done hidden" id="done" role="status"></p>
+  </section>
+
+  <div class="invite">
+    <!-- Replace invite.png in the repo with your own image -->
+    <img src="invite.png" alt="Halloween Party invitation">
+  </div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form class="sheet" id="form" method="dialog">
+    <h2 id="dlg-title">Add your name</h2>
+    <p id="dlg-sub"></p>
+    <input id="name" name="name" placeholder="Your name" autocomplete="name" enterkeyhint="send" required aria-label="Your name">
+    <p class="err" id="err" role="alert"></p>
+    <div class="row">
+      <button class="btn no" id="cancel" type="button">Cancel</button>
+      <button class="btn yes" id="send" type="submit">Send</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const KEY = "p77-halloween";
+  let answer = "";
+
+  // animated sky
+  (function () {
+    const sky = $("sky");
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const small = innerWidth < 600;
+    for (let i = 0; i < (small ? 26 : 48); i++) {
+      const el = document.createElement("i");
+      el.className = "star" + (Math.random() < .25 ? " warm" : "");
+      const sz = rnd(6, 16);
+      el.style.cssText = `left:${rnd(0,100)}%;top:${rnd(0,100)}%;width:${sz}px;height:${sz}px;--d:${rnd(2,5)}s;--delay:${rnd(0,5)}s`;
+      sky.appendChild(el);
+    }
+    const SVG = {
+      bat: `<svg viewBox="0 0 60 30"><g fill="#1b0c33" stroke="#a88bff" stroke-width="1" stroke-linejoin="round"><path class="wl" d="M28 14C20 4 8 6 2 12C8 12 10 16 12 20C16 16 20 18 22 22C24 20 26 18 28 18Z"/><path class="wr" d="M32 14C40 4 52 6 58 12C52 12 50 16 48 20C44 16 40 18 38 22C36 20 34 18 32 18Z"/><ellipse cx="30" cy="17" rx="4.5" ry="7"/><path d="M26.5 11L27.5 5L30 10L32.5 5L33.5 11Z"/></g><circle cx="28.3" cy="14.5" r="1" fill="#ffd36b"/><circle cx="31.7" cy="14.5" r="1" fill="#ffd36b"/></svg>`,
+      ghost: `<svg viewBox="0 0 40 50"><path d="M4 46V20C4 8 12 2 20 2C28 2 36 8 36 20V46L30 40L25 46L20 40L15 46L10 40Z" fill="#f2f7ff" fill-opacity=".92"/><circle cx="14" cy="20" r="3" fill="#1a2250"/><circle cx="26" cy="20" r="3" fill="#1a2250"/><ellipse cx="20" cy="30" rx="3.2" ry="4.2" fill="#1a2250"/><ellipse cx="9.5" cy="27" rx="3" ry="1.8" fill="#ffb3c8" fill-opacity=".7"/><ellipse cx="30.5" cy="27" rx="3" ry="1.8" fill="#ffb3c8" fill-opacity=".7"/></svg>`,
+      pumpkin: `<svg viewBox="0 0 50 46"><path d="M25 9C25 5 27 3 31 2" stroke="#4d7d1f" stroke-width="3.5" fill="none" stroke-linecap="round"/><g fill="#f0791a" stroke="#b34f08" stroke-width="1.2"><ellipse cx="14" cy="27" rx="12" ry="16"/><ellipse cx="36" cy="27" rx="12" ry="16"/><ellipse cx="25" cy="27" rx="12" ry="17"/></g><g class="face" fill="#ffd36b"><path d="M14 22L20 22L17 16Z"/><path d="M30 22L36 22L33 16Z"/><path d="M13 31L17 35L21 32L25 36L29 32L33 35L37 31L35 40L29 38L25 41L21 38L15 40Z"/></g></svg>`,
+      spider: `<svg viewBox="0 0 40 60"><line x1="20" y1="-700" x2="20" y2="32" stroke="#cfe9ff" stroke-opacity=".6" stroke-width="1"/><g class="legs" stroke="#c9b6ff" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M16 40L6 34L2 42"/><path d="M16 42L5 44L3 52"/><path d="M16 38L7 28L3 32"/><path d="M24 40L34 34L38 42"/><path d="M24 42L35 44L37 52"/><path d="M24 38L33 28L37 32"/></g><circle cx="20" cy="44" r="7" fill="#1b0c33" stroke="#a88bff"/><circle cx="20" cy="34" r="4.5" fill="#1b0c33" stroke="#a88bff"/><circle cx="18.4" cy="33.5" r="1.1" fill="#ff7a59"/><circle cx="21.6" cy="33.5" r="1.1" fill="#ff7a59"/></svg>`
+    };
+    const kinds = ["bat","ghost","bat","pumpkin","bat","ghost","pumpkin","bat"];
+    for (let i = 0; i < (small ? 7 : 12); i++) {
+      const k = kinds[i % kinds.length];
+      const el = document.createElement("div");
+      el.className = "float " + k;
+      el.innerHTML = SVG[k];
+      const w = k === "bat" ? rnd(40, 64) : k === "ghost" ? rnd(30, 46) : rnd(32, 48);
+      el.style.cssText = `left:${rnd(2,92)}%;width:${w}px;--dur:${rnd(18,34)}s;--delay:${-rnd(0,30)}s;--sway:${rnd(20,60)}px`;
+      sky.appendChild(el);
+    }
+    for (let i = 0; i < (small ? 2 : 4); i++) {
+      const el = document.createElement("div");
+      el.className = "dangle";
+      el.innerHTML = SVG.spider;
+      el.style.cssText = `left:${rnd(4,92)}%;width:${rnd(26,38)}px;--dur:${rnd(7,12)}s;--delay:${-rnd(0,8)}s;--drop:${rnd(12,28)}vh`;
+      sky.appendChild(el);
+    }
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      (function shoot() {
+        const el = document.createElement("div");
+        el.className = "shoot";
+        el.style.cssText = `left:${rnd(5,60)}%;top:${rnd(3,35)}%`;
+        sky.appendChild(el);
+        setTimeout(() => el.remove(), 1400);
+        setTimeout(shoot, rnd(3500, 8000));
+      })();
+    }
+  })();
+
+
+  function showDone(rec) {
+    $("actions").classList.add("hidden");
+    $("done").classList.remove("hidden");
+    $("done").textContent = rec.answer === "going"
+      ? `You’re on the list, ${rec.name}. See you on Oct 31.`
+      : `Thanks ${rec.name}, we’ll miss you.`;
+  }
+
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) showDone(s); } catch (_) {}
+
+  document.querySelectorAll("[data-answer]").forEach(b => b.addEventListener("click", () => {
+    answer = b.dataset.answer;
+    $("dlg-sub").textContent = answer === "going" ? "Great. Who’s coming?" : "Sorry to hear it. Add your name so we know.";
+    $("err").textContent = "";
+    $("dlg").showModal();
+    $("name").focus();
+  }));
+
+  $("cancel").addEventListener("click", () => $("dlg").close());
+  $("dlg").addEventListener("click", (e) => { if (e.target === $("dlg")) $("dlg").close(); });
+
+  $("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = $("name").value.trim();
+    if (!name) { $("err").textContent = "Add your name."; return; }
+    const btn = $("send"); btn.disabled = true; btn.textContent = "Sending…";
+    const rec = { name, answer };
+    try {
+      if (CONFIG.formspreeId) {
+        const res = await fetch("https://formspree.io/f/" + CONFIG.formspreeId, {
+          method: "POST",
+          headers: { "Accept": "application/json", "Content-Type": "application/json" },
+          body: JSON.stringify({ name, answer })
+        });
+        if (!res.ok) throw new Error();
+      } else {
+        location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent("Halloween Party: " + name + " is " + answer)}&body=${encodeURIComponent(name + " is " + answer)}`;
+      }
+      try { localStorage.setItem(KEY, JSON.stringify(rec)); } catch (_) {}
+      $("dlg").close();
+      showDone(rec);
+    } catch (_) {
+      $("err").textContent = "Couldn’t send. Check your connection and try again.";
+    } finally {
+      btn.disabled = false; btn.textContent = "Send";
+    }
+  });
+})();
+</script>
+</body>
+</html>
